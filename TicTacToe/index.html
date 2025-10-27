@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Крестики-нолики</title>
+</head>
+<body>
+	<div class="work-space">
+		<div class="screen start-screen active" id="start_screen">
+			<h1>Крестики-нолики</h1>
+			<div class="players">
+				<label for="player1">Игрок 1:</label>
+				<input type="text" id="player1" value="Игрок 1">
+				<div class="player-icon"></div>
+				<button class="btn btn-icon icon-swap" id="btn_icon_swap"></button>
+				<label for="player2">Игрок 2:</label>
+				<input type="text" id="player2" value="Игрок 2">
+				<div class="player-icon"></div>
+				<h4>Поле:</h4>
+				<p class="field-size"><span id="size_w">3</span> на <span id="size_h">3</span></p><p></p><p></p>
+				<h4>Собрать:</h4>
+				<p class="field-size"><span id="count_in_row">3</span> в ряд</p><p></p><p></p>
+			</div>
+			<button class="btn" id="btn_instruction">Правила игры</button>
+			<button class="btn" id="btn_config">Настройки</button>
+			<button class="btn btn-color" id="btn_start">Играть</button>
+		</div>
+		<dialog id="config" class="modal">
+			<h2>Настройки</h2>
+			<dialog class="modal" id="config_icons_list" style="--color1:#222222; position-anchor:--icons-list1;position:absolute;top:anchor(bottom); left:anchor(left);">
+				<form method="dialog">
+					<!--
+					<button value="images/circle.png" class="player-icon" style="--icon1: url(images/circle.png"></button>
+					<button value="images/cross.png)" class="player-icon" style="--icon1: url(images/cross.png)"></button>
+					<button value="images/circle_fill.png" class="player-icon" style="--icon1: url(images/circle_fill.png)"></button>
+					-->
+				</form>
+			</dialog>
+			<div class="config-item">
+				<label for="config_color1" id="config_player1">Игрок 1:</label>
+				<input type="color" id="config_color1" list="config_color1_list">
+				<datalist id="config_color1_list">
+				    <option value="#ff6600">
+				    <option value="#5a1e00">
+				    <option value="#222222">
+				</datalist>
+				<button style="anchor-name: --icons-list1;" id="btn_config_player1_icon" class="btn btn-icon">
+					<div class="player-icon"></div>
+				</button>
+			</div>
+			<div class="config-item">
+				<label for="config_color2" id="config_player2">Игрок 2:</label>
+				<input type="color" id="config_color2" list="config_color2_list" value="#ff6600">
+				<datalist id="config_color2_list">
+				    <option value="#ff6600">
+				    <option value="#5a1e00">
+				    <option value="#222222">
+				</datalist>
+				<button style="anchor-name: --icons-list2;" id="btn_config_player2_icon"class="btn btn-icon">
+					<div class="player-icon"></div>
+				</button>
+			</div>
+			<div class="config-item">
+				<label for="config_size_w">Ширина поля:</label>
+				<input type="number" id="config_size_w" value="3" min="3">
+			</div>
+			<div class="config-item">
+				<label for="config_size_h">Длина поля:</label>
+				<input type="number" id="config_size_h" value="3" min="3">
+			</div>
+			<div class="config-item">
+				<label for="config_count">Собрать в ряд:</label>
+				<input type="number" id="config_count" value="3" min="3">
+			</div>
+			<button class="btn" id="btn_default">Сбросить</button>
+			<button class="btn btn-color" id="btn_apply">Применить</button>
+			<button class="btn" id="btn_cancel">Отменить</button>
+		</dialog>
+		<dialog class="modal" id="instruction">
+			<p>В первой игре начинает ходить Игрок 1.</p>
+			<p>Каждую игру право первого хода переходит к сопернику.</p>
+			<p>Ничья не меняет счёт.</p>
+			<button class="btn btn-color" id="btn_instruction_close">Всё понятно</button>
+		</dialog>
+		<div class="screen game-screen" id="game_screen">
+			<div class="title-block">
+				<h1 id="game_name">Классические крестики-нолики</h1>
+				<div class="title-players">
+					<h2 id="player_name1">Игрок 1</h2>
+					<!--button class="btn btn-icon icon-swap" id="btn_name_swap"></button-->
+					<h3 class="score"><span id="score1">0</span> : <span id="score2">0</span></h3>
+					<h2 id="player_name2">Игрок 2</h2>
+				</div>
+				<div style='display:flex;align-items: center;justify-content: center;'><h3 id="game_number">Игра 1:</h3><p id="game_text"></p></div>
+			</div>
+			<div class="main-block">
+				<div class="crosses">
+					<div class="icon-box" id="player1_box">
+						<div draggable="true" class="player-icon" ondragstart="drag(event);"></div>
+					</div>
+					<p class="step" hidden id="player1_step"></p>
+				</div>
+				<div class="game-field">
+				</div>
+				<div class="circles">
+					<div class="icon-box" id="player2_box">
+						<div draggable="true" class="player-icon" ondragstart="drag(event);"></div>
+					</div>
+					<p class="step" hidden id="player2_step"></p>
+				</div>
+				<dialog id="game_result">
+					<button class="btn" id="btn_new_game">Новая игра</button>
+				</dialog>
+			</div>
+			<div class="footer-block">
+				<button class="btn" id="btn_draw">Ничья</button>
+				<button class="btn" id="btn_restart">Сбросить счёт</button>
+				<button class="btn btn-color" id="btn_exit">Выйти</button>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="config.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>

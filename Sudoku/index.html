@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Mobile status bar color -->
+	<meta name="theme-color" content="#fff" charset="utf-8">
+	<title>Sudoku</title>
+	<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+	<link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css">
+	<link rel="stylesheet" href="app.css">
+</head>
+<body>
+	<!-- top nav -->
+	<nav>
+		<div class="nav-container">
+			<a href="#" class="nav-logo">Судоку</a>
+			<div class="config-panel">
+				<div class="hint-toggle" id="hint-toggle" title="Подсказки включены">
+					<i class='bx bxs-bulb'></i>
+				</div>
+				<div class="dark-mode-toggle" id="dark-mode-toggle">
+					<i class="bx bxs-sun" title="Светлый режим"></i>
+					<i class="bx bxs-moon"title="Тёмный режим"></i>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<!-- end top nav -->
+
+	<!-- main -->
+	<div class="main">
+		<div class="screen">
+			<!-- start screen -->
+			<div class="start-screen active" id="start-screen">
+				<input type="text" placeholder="Ваше имя" maxlength="15" class="input-name" id="input-name">
+				<div class="btn" id="btn-level">Лёгкий</div>
+				<div class="btn" id="btn-continue">Продолжить</div>
+				<div class="btn btn-blue" id="btn-play">Новая игра</div>
+				<div class="btn" id="btn-champions">Чемпионы</div>
+			</div>
+			<!-- start screen -->
+
+			<!-- game screen -->
+			<div class="main-game" id="game-screen">
+				<div class="main-sudoku-grid">
+					<!-- 81 cells -->
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+					<div class="main-grid-cell"></div>
+				</div>
+
+				<div class="main-game-info">
+					<div class="main-game-info-box main-game-info-name">
+						<span id="player-name">Имя</span>
+					</div>
+					<div class="main-game-info-box main-game-info-level">
+						<span id="game-level">Уровень</span>
+					</div>
+					<div class="main-game-info-box main-game-info-time">
+						<span id="game-time">00:00:00</span>
+						<div class="btn btn-pause btn-blue" id="btn-pause">
+							<i class="bx bx-pause"></i>
+						</div>
+					</div>
+				</div>
+
+				<div class="numbers">
+					<div class="number">1</div>
+					<div class="number">2</div>
+					<div class="number">3</div>
+					<div class="number">4</div>
+					<div class="number">5</div>
+					<div class="number">6</div>
+					<div class="number">7</div>
+					<div class="number">8</div>
+					<div class="number">9</div>
+					<div class="btn delete" id="btn-delete">X</div>
+				</div>
+			</div>
+			<!-- end game screen -->
+
+			<!-- pause screen -->
+			<div class="pause-screen" id="pause-screen">
+				<div class="btn btn-blue" id="btn-resume">Продолжить</div>
+				<div class="btn" id="btn-restart">Начать с начала</div>
+				<div class="btn" id="btn-end">Завершить</div>
+			</div>
+			<!-- end pause screen -->
+
+			<!-- result screen -->
+			<div class="result-screen" id="result-screen">
+				<p id="result-text">Вы победили!</p>
+				<p id="result-time">00:00:00</p>
+				<p id="player-best-time"></p>
+				<p id="champion-best-time"></p>
+				<div class="btn" id="btn-champions2">Таблица чемпионов</div>
+				<div class="btn btn-blue" id="btn-exit">Выход</div>
+			</div>
+			<!-- end result screen -->
+
+			<!-- champions screen -->
+			<div class="champions-screen" id="champions-screen">
+				<h2 id="result-text">Таблица чемпионов</h2>
+				<table id="champions-table">
+					<thead>
+						<tr>
+							<th>№</th>
+							<th>Имя игрока</th>
+							<th>Лучшее время</th>
+							<th>Дата игры</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+				<div class="btn btn-blue" id="btn-close">Закрыть</div>
+			</div>
+			<!-- end champions screen -->
+		</div>
+	</div>
+
+	<div class="popup" id="delete-game">
+		<div class="popup-content">
+			<p>Вы хотите завершить текущую игру?</p>
+			<div class="row">
+				<div class="btn" id="btn-yes">Да</div>
+				<div class="btn btn-blue" id="btn-no">Нет</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- end main -->
+
+	<script src="js/constant.js"></script>
+	<script src="js/sudoku.js"></script>
+	<script src="js/app.js"></script>
+</html>
